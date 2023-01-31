@@ -1,14 +1,14 @@
 // Otomatik Cicek Sulama Sistemi 
-// Made by Sercan KURT - TA1AFS
+// Made by Sercan KURT - TA3KRT
 // 
 // pinler :  A2 ayar, A3++, A4--,
-//           AN1 Toprak nem sensˆr¸ //--> ADC toprak nem e˛ik deeri: 720
-//           B0 su bitik sensˆr¸,
-//           B2 ds18b20 s˝cakl˝k sensˆr¸,
+//           AN1 Toprak nem sens√∂r√º //--> ADC toprak nem e√æik de√∞eri: 720
+//           B0 su bitik sens√∂r√º,
+//           B2 ds18b20 s√Ωcakl√Ωk sens√∂r√º,
 //           B1 role su motoru,
 //           B4 SDA 
 //           B5 SCL
-//           B6 nem led gˆsterge
+//           B6 nem led g√∂sterge
 #include <16F88.h>
 #device ADC = 10
 #fuses INTRC_IO, NOWDT, NOMCLR
@@ -16,11 +16,11 @@
 #use i2c (Master, I2C1, sda=PIN_B4, scl=PIN_B5, STREAM = DS3231_STREAM, force_sw)
 #include "i2c_Flex_lcd.c"
 #include "ds3231.c"
-#define ONE_WIRE_PIN PIN_B2// sensˆr¸n DQ baca˝n˝n balanaca˝ pin
+#define ONE_WIRE_PIN PIN_B2// sens√∂r√ºn DQ baca√∞√Ωn√Ωn ba√∞lanaca√∞√Ω pin
 #include "ds18b20.c"
 #use fast_io(a)
 #use fast_io(b)
-unsigned int ayar=0, s_saat=0, s_dakika=0, s_saniye_st=0, s_saniye_fn=0; //saat ayar˝ iÁin
+unsigned int ayar=0, s_saat=0, s_dakika=0, s_saniye_st=0, s_saniye_fn=0; //saat ayar√Ω i√ßin
 unsigned int16 nem=0;
 float temp=0;
 RTC_Time *mytime;
@@ -108,7 +108,7 @@ delay_ms(500);
 lcd_clear(); 
 mytime = RTC_Get(); 
 IntSqw_Set(OUT_1Hz); 
-s_saat=read_eeprom(0);  //sulama ayar˝ iÁin kaydedilmi˛ eeprom verileri okunuyor e˛le˛tiriliyor.
+s_saat=read_eeprom(0);  //sulama ayar√Ω i√ßin kaydedilmi√æ eeprom verileri okunuyor e√æle√ætiriliyor.
 s_dakika=read_eeprom(1);
 s_saniye_st=read_eeprom(2);
 s_saniye_fn=read_eeprom(3);
@@ -125,8 +125,8 @@ nem=read_adc();
          mytime->seconds >=  s_saniye_st && 
          mytime->seconds <= s_saniye_fn &&  
          nem <= 700 &&
-         (input(pin_b0)==1)  /* Yaz˝n sat˝r˝ devre d˝˛˝ b˝rak &&
-       // (mytime->dow == MONDAY || mytime->dow == WEDNESDAY || mytime->dow == FRIDAY || mytime->dow == SUNDAY) // Sulayaca˝ g¸nler  Yaz˝n sat˝r˝ devre d˝˛˝ b˝rak */
+         (input(pin_b0)==1)  /* Yaz√Ωn sat√Ωr√Ω devre d√Ω√æ√Ω b√Ωrak &&
+       // (mytime->dow == MONDAY || mytime->dow == WEDNESDAY || mytime->dow == FRIDAY || mytime->dow == SUNDAY) // Sulayaca√∞√Ω g√ºnler  Yaz√Ωn sat√Ωr√Ω devre d√Ω√æ√Ω b√Ωrak */
          )   
         { delay_ms(10); output_high(pin_b1);
          lcd_gotoxy(9,2); lcd_putc(" sulama "); delay_ms(500); lcd_gotoxy(9,2); lcd_putc("        "); delay_ms(500);
@@ -143,7 +143,7 @@ nem=read_adc();
    if   (mytime->hours >= 00 && mytime->hours <= 07) {lcd_backlight_led(OFF);}
    else {lcd_backlight_led(ON);}
    
-   if(s_saniye_st==59) s_saniye_st=-1;  //S˝n˝rland˝rmalar
+   if(s_saniye_st==59) s_saniye_st=-1;  //S√Ωn√Ωrland√Ωrmalar
    if(s_saniye_fn==59) s_saniye_fn=-1;
    if(s_dakika==59)    s_dakika=-1;
    if(s_saat==23)      s_saat=-1;
@@ -151,13 +151,13 @@ nem=read_adc();
 }
 
 // pinler :  A2 ayar, A3++, A4--,
-//           AN1 Toprak nem sensˆr¸,
-//           B0 su bitik sensˆr¸,
-//           B2 ds18b20 s˝cakl˝k sensˆr¸,
+//           AN1 Toprak nem sens√∂r√º,
+//           B0 su bitik sens√∂r√º,
+//           B2 ds18b20 s√Ωcakl√Ωk sens√∂r√º,
 //           B1 role su motoru,
 //           B4 SDA 
 //           B5 SCL
-//           B6 nem led gˆsterge
+//           B6 nem led g√∂sterge
 
 
 
