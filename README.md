@@ -1,5 +1,5 @@
 // Otomatik Cicek Sulama Sistemi 
-// Made by Sercan KURT - TA1AFS
+// Made by Sercan KURT - TA3KRT
 // 
 // pinler :  A2 ayar, A3++, A4--,
 //           AN1 Toprak nem sensörü //--> ADC toprak nem eşik değeri: 720
